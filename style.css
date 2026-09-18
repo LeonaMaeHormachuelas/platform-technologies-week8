@@ -1,0 +1,464 @@
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --neon-cyan: #00f0ff;
+    --neon-magenta: #ff00c8;
+    --neon-yellow: #f9f871;
+    --bg-dark: #0a0a12;
+    --bg-panel: #12121e;
+    --bg-panel-2: #171726;
+    --text-main: #e6faff;
+    --text-dim: #8a8fa8;
+}
+
+body {
+    margin: 0;
+    font-family: 'Share Tech Mono', 'Courier New', monospace;
+    line-height: 1.6;
+    background:
+        radial-gradient(circle at 20% 10%, rgba(255, 0, 200, 0.12), transparent 40%),
+        radial-gradient(circle at 85% 30%, rgba(0, 240, 255, 0.12), transparent 45%),
+        repeating-linear-gradient(0deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 3px),
+        var(--bg-dark);
+    color: var(--text-main);
+    position: relative;
+}
+
+/* subtle scanline overlay */
+.scanlines {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1000;
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.12) 0px,
+        rgba(0, 0, 0, 0.12) 1px,
+        transparent 1px,
+        transparent 3px
+    );
+    mix-blend-mode: overlay;
+}
+
+header {
+    text-align: center;
+    padding: 50px 20px 35px;
+    background: linear-gradient(180deg, #0d0d18, #0a0a12);
+    border-bottom: 2px solid var(--neon-cyan);
+    box-shadow: 0 0 25px rgba(0, 240, 255, 0.35), 0 2px 0 rgba(255, 0, 200, 0.4);
+    position: relative;
+    overflow: hidden;
+}
+
+header::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent, rgba(0,240,255,0.06), transparent);
+    animation: sweep 6s linear infinite;
+}
+
+@keyframes sweep {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+header h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 900;
+    font-size: 2.2rem;
+    letter-spacing: 2px;
+    margin: 0;
+    color: var(--neon-cyan);
+    text-shadow:
+        0 0 6px var(--neon-cyan),
+        0 0 18px rgba(0, 240, 255, 0.7),
+        0 0 2px #fff;
+    text-transform: uppercase;
+}
+
+header p {
+    margin-top: 10px;
+    color: var(--neon-magenta);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    text-shadow: 0 0 8px rgba(255, 0, 200, 0.7);
+}
+
+nav {
+    text-align: center;
+    padding: 14px 15px;
+    background: #0d0d18;
+    border-bottom: 1px solid rgba(0, 240, 255, 0.35);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+nav a {
+    color: var(--text-main);
+    text-decoration: none;
+    margin: 0 15px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 6px 4px;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s ease, border-color 0.2s ease, text-shadow 0.2s ease;
+}
+
+nav a:hover {
+    color: var(--neon-cyan);
+    border-color: var(--neon-cyan);
+    text-shadow: 0 0 8px rgba(0, 240, 255, 0.8);
+    text-decoration: none;
+}
+
+main {
+    max-width: 900px;
+    margin: auto;
+    padding: 30px 20px;
+}
+
+section {
+    background: linear-gradient(180deg, var(--bg-panel), var(--bg-panel-2));
+    margin-bottom: 26px;
+    padding: 28px;
+    border-radius: 4px;
+    border: 1px solid rgba(0, 240, 255, 0.25);
+    box-shadow:
+        0 0 0 1px rgba(255, 0, 200, 0.08) inset,
+        0 8px 24px rgba(0, 0, 0, 0.5);
+    position: relative;
+}
+
+section::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0;
+    width: 40px;
+    height: 3px;
+    background: var(--neon-magenta);
+    box-shadow: 0 0 10px var(--neon-magenta);
+}
+
+h2 {
+    margin-top: 0;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 700;
+    font-size: 1.3rem;
+    letter-spacing: 1px;
+    color: var(--neon-magenta);
+    text-shadow: 0 0 10px rgba(255, 0, 200, 0.6);
+    text-transform: uppercase;
+}
+
+h3 {
+    color: var(--neon-cyan);
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+}
+
+p {
+    color: var(--text-main);
+}
+
+ul {
+    color: var(--text-main);
+}
+
+footer {
+    text-align: center;
+    padding: 30px 20px;
+    background: #0a0a12;
+    border-top: 2px solid var(--neon-magenta);
+    box-shadow: 0 0 25px rgba(255, 0, 200, 0.35);
+    color: var(--text-dim);
+}
+
+footer p {
+    color: var(--text-dim);
+    font-size: 0.85rem;
+    margin: 6px 0;
+}
+
+/* ---------- About Me (interactive) ---------- */
+
+.about-card {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+
+.about-photo {
+    flex: 0 0 200px;
+    text-align: center;
+}
+
+.photo-frame {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+    border-radius: 50%;
+    background: #0d0d18;
+    border: 3px solid var(--neon-cyan);
+    box-shadow:
+        0 0 16px rgba(0, 240, 255, 0.7),
+        0 0 40px rgba(255, 0, 200, 0.25),
+        inset 0 0 20px rgba(0, 240, 255, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.photo-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: drop-shadow(0 0 6px rgba(0, 240, 255, 0.4));
+}
+
+.github-badge {
+    position: absolute;
+    bottom: -6px;
+    right: -6px;
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #0d0d18;
+    color: var(--neon-cyan);
+    border-radius: 50%;
+    border: 2px solid var(--neon-cyan);
+    box-shadow: 0 0 10px rgba(0, 240, 255, 0.8);
+    transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+
+.github-badge:hover {
+    background: var(--neon-cyan);
+    color: #0a0a12;
+    transform: scale(1.12);
+}
+
+.photo-caption {
+    margin-top: 16px;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+    color: var(--text-main);
+}
+
+.photo-role {
+    margin-top: 4px;
+    font-size: 12px;
+    color: var(--neon-magenta);
+    letter-spacing: 0.5px;
+}
+
+.about-content {
+    flex: 1 1 300px;
+    min-width: 260px;
+}
+
+.about-intro {
+    margin-top: 0;
+    color: var(--text-dim);
+}
+
+.tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 18px;
+    border-bottom: 1px solid rgba(0, 240, 255, 0.2);
+    padding-bottom: 14px;
+}
+
+.tab-btn {
+    background: transparent;
+    border: 1px solid rgba(0, 240, 255, 0.4);
+    padding: 7px 15px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    transition: all 0.2s ease;
+}
+
+.tab-btn:hover {
+    color: var(--neon-cyan);
+    border-color: var(--neon-cyan);
+    box-shadow: 0 0 8px rgba(0, 240, 255, 0.5);
+}
+
+.tab-btn.active {
+    background: var(--neon-cyan);
+    color: #0a0a12;
+    border-color: var(--neon-cyan);
+    box-shadow: 0 0 14px rgba(0, 240, 255, 0.8);
+}
+
+.tab-panel {
+    display: none;
+    animation: fadeIn 0.3s ease;
+}
+
+.tab-panel.active {
+    display: block;
+}
+
+.tab-panel h3 {
+    margin-bottom: 4px;
+}
+
+.tab-panel ul {
+    margin-top: 5px;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive: stack photo above content on small screens */
+@media (max-width: 560px) {
+    .about-card {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+}
+
+/* Skill pills */
+.pill-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.pill {
+    background: rgba(255, 0, 200, 0.1);
+    color: var(--neon-magenta);
+    border: 1px solid rgba(255, 0, 200, 0.5);
+    padding: 5px 14px;
+    border-radius: 3px;
+    font-size: 12px;
+    font-family: 'Orbitron', sans-serif;
+    letter-spacing: 0.5px;
+}
+
+.icon-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.icon-list li {
+    margin-bottom: 6px;
+}
+
+/* ---------- Platform Technologies grid ---------- */
+
+.platform-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 14px;
+    margin-top: 20px;
+}
+
+.platform-card {
+    background: rgba(0, 240, 255, 0.04);
+    border: 1px solid rgba(0, 240, 255, 0.3);
+    border-radius: 4px;
+    padding: 18px 12px;
+    text-align: center;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    color: var(--text-main);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.platform-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--neon-cyan);
+    box-shadow: 0 6px 18px rgba(0, 240, 255, 0.35);
+}
+
+.platform-icon {
+    display: block;
+    font-size: 26px;
+    margin-bottom: 8px;
+    filter: drop-shadow(0 0 4px rgba(0, 240, 255, 0.6));
+}
+
+/* ---------- Laboratory Information grid ---------- */
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 14px;
+}
+
+.info-item {
+    background: rgba(255, 0, 200, 0.04);
+    border-left: 3px solid var(--neon-magenta);
+    border-radius: 3px;
+    padding: 12px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.info-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-dim);
+    font-family: 'Orbitron', sans-serif;
+}
+
+.info-value {
+    font-weight: bold;
+    color: var(--neon-cyan);
+}
+
+/* ---------- Footer GitHub link ---------- */
+
+.footer-github {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--neon-cyan);
+    text-decoration: none;
+    background: rgba(0, 240, 255, 0.06);
+    border: 1px solid rgba(0, 240, 255, 0.4);
+    padding: 8px 18px;
+    border-radius: 3px;
+    margin-bottom: 18px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    transition: all 0.2s ease;
+}
+
+.footer-github:hover {
+    background: var(--neon-cyan);
+    color: #0a0a12;
+    box-shadow: 0 0 14px rgba(0, 240, 255, 0.7);
+    text-decoration: none;
+}
